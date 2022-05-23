@@ -26,6 +26,6 @@ public class SignInPage {
         email.sendKeys(emailValue);
         password.sendKeys(passwordValue);
         submit.click();
-        return null;
+        return new MainPage(driver);
     }
 }

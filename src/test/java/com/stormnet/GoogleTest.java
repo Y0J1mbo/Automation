@@ -15,7 +15,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import pages.SignInPage;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.*;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.List;
@@ -160,30 +161,42 @@ public class GoogleTest extends BaseTest {
         SignInPage signInPage = new SignInPage(driver);
         signInPage.loginAs("kickforce666@gmail.com", "123qweQWE");
         // step 3 click on dresses
-        Actions action = new Actions(driver);
+        /*Actions action = new Actions(driver);
         WebElement dresstab = driver.findElement(By.cssSelector("#block_top_menu > ul > li:nth-child(2) > a"));
-        action.moveToElement(dresstab).build().perform();
-        driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[2]/ul/li[1]/a")).click();
+        action.moveToElement(dresstab).build().perform();*/
+        MainPage.hoverDress();
+        //driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[2]/ul/li[1]/a")).click();
+        MainPage.selectCasual();
         // step 4 hover over and click add
-        WebElement dress = driver.findElement(By.cssSelector(".product-container"));
-        action.moveToElement(dress).build().perform();
-        WebElement add = driver.findElement(By.cssSelector(".ajax_add_to_cart_button.btn.btn-default"));
-        add.click();
+        /*WebElement dress = driver.findElement(By.cssSelector(".product-container"));
+        action.moveToElement(dress).build().perform();*/
+        CasualDressPage.hoverOverDress();
+        /*WebElement add = driver.findElement(By.cssSelector(".ajax_add_to_cart_button.btn.btn-default"));
+        add.click();*/
+        CasualDressPage.pressAddBtn();
         // step 5
-        driver.switchTo().activeElement();
-        driver.findElement(By.cssSelector(".col-md-6 > div.button-container > a")).click();
+        //driver.switchTo().activeElement();
+        CasualDressPage.switchToActivate();
+        //driver.findElement(By.cssSelector(".col-md-6 > div.button-container > a")).click();
+        CasualDressPage.clickPopupBtn();
         // step 6 proceed address
-        driver.findElement(By.cssSelector(".btn-default.standard-checkout.button-medium")).click();
+        //driver.findElement(By.cssSelector(".btn-default.standard-checkout.button-medium")).click();
+        ShoppingCartSummary.setProccAdrs();
         // step 7 shipping
-        driver.findElement(By.cssSelector(" p > button")).click();
+        //driver.findElement(By.cssSelector(" p > button")).click();
+        ShoppingCartSummary.setCheckout();
         // step 8 tickbox
-        driver.findElement(By.id("cgv")).click();
+        //driver.findElement(By.id("cgv")).click();
+        ShoppingCartSummary.setTermCondit();
         // step 9 proceed carrier
-        driver.findElement(By.cssSelector("p > button")).click();
+        //driver.findElement(By.cssSelector("p > button")).click();
+        ShoppingCartSummary.setCheckout();
         // step 10 payment
-        driver.findElement(By.cssSelector(".bankwire")).click();
+        //driver.findElement(By.cssSelector(".bankwire")).click();
+        ShoppingCartSummary.setBankwire();
         // step 11 confirm
-        driver.findElement(By.cssSelector("#cart_navigation > button")).click();
+        //driver.findElement(By.cssSelector("#cart_navigation > button")).click();
+        ShoppingCartSummary.setConfirmorder();
 
     }
 
@@ -199,25 +212,36 @@ public class GoogleTest extends BaseTest {
         signInPage.loginAs("kickforce666@gmail.com", "123qweQWE");
         //steps
         // step 1 t-shirt click
-        driver.findElement(By.cssSelector("#block_top_menu > ul > li:nth-child(3) > a")).click();
+        //driver.findElement(By.cssSelector("#block_top_menu > ul > li:nth-child(3) > a")).click();
+        MainPage.setTshirt();
         // step 2 hover over more
-        Actions action = new Actions(driver);
+        /*Actions action = new Actions(driver);
         WebElement shirt = driver.findElement(By.cssSelector(".product_img_link"));
-        action.moveToElement(shirt).build().perform();
-        WebElement more = driver.findElement(By.cssSelector(".button.lnk_view.btn.btn-default"));
-        more.click();
+        action.moveToElement(shirt).build().perform();*/
+        Tshirt.setHoverOver();
+        /*WebElement more = driver.findElement(By.cssSelector(".button.lnk_view.btn.btn-default"));
+        more.click();*/
+        Tshirt.clickMorebtn();
         // step 3 write review click
-        driver.findElement(By.cssSelector("#product_comments_block_extra > ul > li > a")).click();
-        driver.switchTo().activeElement();
+        /*driver.findElement(By.cssSelector("#product_comments_block_extra > ul > li > a")).click();
+        driver.switchTo().activeElement();*/
+        Tshirt.clickReviewBtn();
+        Tshirt.switchToActivate();
         // step 4 parameters
-        driver.findElement(By.cssSelector(".star_content > div:nth-child(7) > a")).click();
+       /* driver.findElement(By.cssSelector(".star_content > div:nth-child(7) > a")).click();
         driver.findElement(By.id("comment_title")).sendKeys("High quality product");
-        driver.findElement(By.id("content")).sendKeys("The Best of the best");
+        driver.findElement(By.id("content")).sendKeys("The Best of the best");*/
+        Tshirt.setStarQuality();
+        Tshirt.sendCommentTitle();
+        Tshirt.sendCommentContent();
         // step 5 click send
-        driver.findElement(By.id("submitNewMessage")).click();
+        //driver.findElement(By.id("submitNewMessage")).click();
+        Tshirt.clickSendBtn();
         // step 6
-        driver.switchTo().activeElement();
-        driver.findElement(By.cssSelector(".fancybox-opened > div > div > div > p.submit > button")).click();
+        //driver.switchTo().activeElement();
+        Tshirt.switchToActivate();
+        //driver.findElement(By.cssSelector(".fancybox-opened > div > div > div > p.submit > button")).click();
+        Tshirt.clickOkBtn();
     }
     @Test
     public void dressToWishlist(){
@@ -254,7 +278,7 @@ public class GoogleTest extends BaseTest {
         driver.findElement(By.xpath("//*[@id=\"wishlist_48056\"]/td[1]/a")).click();
         // step 8 delete wish
         driver.findElement(By.xpath("//*[@id=\"wishlist_48056\"]/td[6]/a/i")).click();
-        WebDriverRunner.getWebDriver().switchTo().alert();
+        driver.switchTo().alert().accept();
     }
     @Test
     public void checkSummerDressForDiffColours(){
