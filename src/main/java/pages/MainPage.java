@@ -7,8 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainPage {
-    static WebDriver driver;
+public class MainPage extends BasePage {
+    //static WebDriver driver;
     @FindBy (css = "#block_top_menu > ul > li:nth-child(2) > a" )
             static WebElement dresstab;
     @FindBy (xpath = "//*[@id='block_top_menu']/ul/li[2]/ul/li[1]/a")
@@ -17,19 +17,24 @@ public class MainPage {
             static WebElement tshirt;
 
     public MainPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+       /* this.driver = driver;
+        PageFactory.initElements(driver, this);*/
+        super (driver);
     }
-    public static void hoverDress(){
+    public void hoverDress(){
         Actions action = new Actions(driver);
         action.moveToElement(dresstab).build().perform();
         //return new;
     }
-    public static CasualDressPage selectCasual(){
+    public SignInPage openPage(String urladdress) {
+        driver.get(urladdress);
+        return new SignInPage(driver);
+    }
+    public CasualDressPage selectCasual(){
         casualDress.click();
         return new CasualDressPage(driver);
     }
-    public static Tshirt setTshirt(){
+    public Tshirt setTshirt(){
         tshirt.click();
         return new Tshirt(driver);
     }

@@ -7,12 +7,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static pages.MainPage.driver;
+//import static pages.MainPage.driver;
 
-public class Tshirt {
+public class Tshirt extends BasePage{
     public Tshirt(WebDriver driver) {
-
-        PageFactory.initElements(driver, this);
+super(driver);
+        //PageFactory.initElements(driver, this);
     }
 
     @FindBy(css = ".product_img_link")
@@ -33,40 +33,40 @@ public class Tshirt {
     static WebElement okbtn;
 
 
-    public static void setHoverOver() {
+    public void setHoverOver() {
         Actions action = new Actions(driver);
         action.moveToElement(hovertshirt).build().perform();
     }
 
-    public static void clickMorebtn() {
+    public void clickMorebtn() {
         morebtn.click();
     }
 
-    public static void clickReviewBtn() {
+    public void clickReviewBtn() {
         writebtn.click();
     }
 
-    public static void switchToActivate() {
+    public void switchToActivate() {
         driver.switchTo().activeElement();
     }
 
-    public static void setStarQuality() {
+    public void setStarQuality() {
         starquality.click();
     }
 
-    public static void sendCommentTitle() {
+    public void sendCommentTitle() {
         commenttitle.sendKeys("High quality product");
     }
 
-    public static void sendCommentContent() {
+    public void sendCommentContent() {
         commentcontent.sendKeys("The Best of the best");
     }
 
-    public static void clickSendBtn() {
+    public void clickSendBtn() {
         sendbtn.click();
     }
 
-    public static void clickOkBtn() {
+    public void clickOkBtn() {
         okbtn.click();
     }
 }

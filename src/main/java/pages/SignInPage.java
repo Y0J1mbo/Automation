@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class SignInPage {
-    WebDriver driver;
+public class SignInPage extends BasePage {
+   // WebDriver driver;
 
     @FindBy(id = "email")
     WebElement email;
@@ -16,10 +16,16 @@ public class SignInPage {
     WebElement password;
     @FindBy(css = ".icon-lock")
     WebElement submit;
-
+    @FindBy(css = ".header_user_info")
+    WebElement login;
+//driver.findElement(By.cssSelector(".header_user_info")).click();
+    public void logIn (){
+        login.click();
+    }
     public SignInPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        /*this.driver = driver;
+        PageFactory.initElements(driver, this);*/
+        super(driver);
     }
 
     public MainPage loginAs(String emailValue,String passwordValue) {

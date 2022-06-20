@@ -6,9 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ShoppingCartSummary {
+public class ShoppingCartSummary extends BasePage {
     public ShoppingCartSummary(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        //PageFactory.initElements(driver, this);
+        super(driver);
     }
     @FindBy (css = ".btn-default.standard-checkout.button-medium")
     static WebElement proccAdrs;
@@ -21,19 +22,19 @@ public class ShoppingCartSummary {
     @FindBy(css = "#cart_navigation > button")
             static WebElement confirmorder;
 
-    public static void setProccAdrs(){
+    public void setProccAdrs(){
         proccAdrs.click();
     }
-    public static void setCheckout(){
+    public void setCheckout(){
         checkout.click();
     }
-    public static void setTermCondit(){
+    public void setTermCondit(){
         termCondit.click();
     }
-    public static void setBankwire(){
+    public void setBankwire(){
         bankwire.click();
     }
-    public static void setConfirmorder(){
+    public void setConfirmorder(){
         confirmorder.click();
     }
 }
