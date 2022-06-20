@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 import org.junit.jupiter.api.Assertions;
+import services.ui.Feature;
+import services.ui.ScreenshotService;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static services.ui.ScreenshotService.uiExecutor;
 
 /**
  * Simple Selenide Test with PageObjects
@@ -54,6 +57,8 @@ public class GoogleTest extends BaseTest {
         WebDriver webdriver = new ChromeDriver();
         String baseUrl = "http://automationpractice.com/index.php";
         webdriver.get(baseUrl);
+        uiExecutor(Feature.EXAMPLE);
+
         webdriver.close();
     }
 
@@ -75,7 +80,7 @@ public class GoogleTest extends BaseTest {
         webdriver.get(baseUrl);
         webdriver.findElement(By.cssSelector(".header_user_info")).click();
         //step 2 email and create account
-        webdriver.findElement(By.id("email_create")).sendKeys("mikalai.ilyin+test10@aterise.com");
+        webdriver.findElement(By.id("email_create")).sendKeys("mikalai.ilyin+test11@aterise.com");
         webdriver.findElement(By.cssSelector(".icon-user")).click();
         webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //Step 3 fill the fields
@@ -154,49 +159,49 @@ public class GoogleTest extends BaseTest {
         // System.setProperty("webdriver.chrome.driver", "/Users/mikalaiilyin/IdeaProjects/chromedriver");
         // WebDriver webdriver = new ChromeDriver();
         //step 1 open google page
-        String baseUrl = "http://automationpractice.com/index.php";
-        driver.get(baseUrl);
-        driver.findElement(By.cssSelector(".header_user_info")).click();
-        // step 2 enter parameters
-        SignInPage signInPage = new SignInPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
+        SignInPage signInPage = mainPage.openPage("http://automationpractice.com/index.php");
+        signInPage.logIn();
         signInPage.loginAs("kickforce666@gmail.com", "123qweQWE");
         // step 3 click on dresses
         /*Actions action = new Actions(driver);
         WebElement dresstab = driver.findElement(By.cssSelector("#block_top_menu > ul > li:nth-child(2) > a"));
         action.moveToElement(dresstab).build().perform();*/
-        MainPage.hoverDress();
+        mainPage.hoverDress();
         //driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[2]/ul/li[1]/a")).click();
-        MainPage.selectCasual();
+        CasualDressPage casualDressPage = mainPage.selectCasual();
+        //mainPage.selectCasual();
         // step 4 hover over and click add
         /*WebElement dress = driver.findElement(By.cssSelector(".product-container"));
         action.moveToElement(dress).build().perform();*/
-        CasualDressPage.hoverOverDress();
+        casualDressPage.hoverOverDress();
         /*WebElement add = driver.findElement(By.cssSelector(".ajax_add_to_cart_button.btn.btn-default"));
         add.click();*/
-        CasualDressPage.pressAddBtn();
+        casualDressPage.pressAddBtn();
         // step 5
         //driver.switchTo().activeElement();
-        CasualDressPage.switchToActivate();
+        casualDressPage.switchToActivate();
         //driver.findElement(By.cssSelector(".col-md-6 > div.button-container > a")).click();
-        CasualDressPage.clickPopupBtn();
+        //casualDressPage.clickPopupBtn();
         // step 6 proceed address
         //driver.findElement(By.cssSelector(".btn-default.standard-checkout.button-medium")).click();
-        ShoppingCartSummary.setProccAdrs();
+        ShoppingCartSummary shoppingCartSummary = casualDressPage.clickPopupBtn();
+        shoppingCartSummary.setProccAdrs();
         // step 7 shipping
         //driver.findElement(By.cssSelector(" p > button")).click();
-        ShoppingCartSummary.setCheckout();
+        shoppingCartSummary.setCheckout();
         // step 8 tickbox
         //driver.findElement(By.id("cgv")).click();
-        ShoppingCartSummary.setTermCondit();
+        shoppingCartSummary.setTermCondit();
         // step 9 proceed carrier
         //driver.findElement(By.cssSelector("p > button")).click();
-        ShoppingCartSummary.setCheckout();
+        shoppingCartSummary.setCheckout();
         // step 10 payment
         //driver.findElement(By.cssSelector(".bankwire")).click();
-        ShoppingCartSummary.setBankwire();
+        shoppingCartSummary.setBankwire();
         // step 11 confirm
         //driver.findElement(By.cssSelector("#cart_navigation > button")).click();
-        ShoppingCartSummary.setConfirmorder();
+        shoppingCartSummary.setConfirmorder();
 
     }
 
@@ -204,54 +209,50 @@ public class GoogleTest extends BaseTest {
     public void possibilityToWriteReview() {
         //presteps
         //step 1 open google page
-        String baseUrl = "http://automationpractice.com/index.php";
-        driver.get(baseUrl);
-        driver.findElement(By.cssSelector(".header_user_info")).click();
-        // step 2 enter parameters
-        SignInPage signInPage = new SignInPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
+        SignInPage signInPage = mainPage.openPage("http://automationpractice.com/index.php");
+        signInPage.logIn();
         signInPage.loginAs("kickforce666@gmail.com", "123qweQWE");
         //steps
         // step 1 t-shirt click
         //driver.findElement(By.cssSelector("#block_top_menu > ul > li:nth-child(3) > a")).click();
-        MainPage.setTshirt();
+        Tshirt tshirt = mainPage.setTshirt();
         // step 2 hover over more
         /*Actions action = new Actions(driver);
         WebElement shirt = driver.findElement(By.cssSelector(".product_img_link"));
         action.moveToElement(shirt).build().perform();*/
-        Tshirt.setHoverOver();
+        tshirt.setHoverOver();
         /*WebElement more = driver.findElement(By.cssSelector(".button.lnk_view.btn.btn-default"));
         more.click();*/
-        Tshirt.clickMorebtn();
+        tshirt.clickMorebtn();
         // step 3 write review click
         /*driver.findElement(By.cssSelector("#product_comments_block_extra > ul > li > a")).click();
         driver.switchTo().activeElement();*/
-        Tshirt.clickReviewBtn();
-        Tshirt.switchToActivate();
+        tshirt.clickReviewBtn();
+        tshirt.switchToActivate();
         // step 4 parameters
        /* driver.findElement(By.cssSelector(".star_content > div:nth-child(7) > a")).click();
         driver.findElement(By.id("comment_title")).sendKeys("High quality product");
         driver.findElement(By.id("content")).sendKeys("The Best of the best");*/
-        Tshirt.setStarQuality();
-        Tshirt.sendCommentTitle();
-        Tshirt.sendCommentContent();
+        tshirt.setStarQuality();
+        tshirt.sendCommentTitle();
+        tshirt.sendCommentContent();
         // step 5 click send
         //driver.findElement(By.id("submitNewMessage")).click();
-        Tshirt.clickSendBtn();
+        tshirt.clickSendBtn();
         // step 6
         //driver.switchTo().activeElement();
-        Tshirt.switchToActivate();
+        tshirt.switchToActivate();
         //driver.findElement(By.cssSelector(".fancybox-opened > div > div > div > p.submit > button")).click();
-        Tshirt.clickOkBtn();
+        tshirt.clickOkBtn();
     }
-    @Test
+   /* @Test
     public void dressToWishlist(){
         //presteps
         //step 1 open google page
-        String baseUrl = "http://automationpractice.com/index.php";
-        driver.get(baseUrl);
-        driver.findElement(By.cssSelector(".header_user_info")).click();
-        // step 2 enter parameters
-        SignInPage signInPage = new SignInPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
+        SignInPage signInPage = mainPage.openPage("http://automationpractice.com/index.php");
+        signInPage.logIn();
         signInPage.loginAs("kickforce666@gmail.com", "123qweQWE");
         //STEPS
         // step 1 blouses button
@@ -312,5 +313,5 @@ public class GoogleTest extends BaseTest {
         driver.findElement(By.id("color_16")).click();
         var imgLnkYe = driver.findElement(By.id("bigpic")).getAttribute("src");
         Assertions.assertEquals(imgLnkYe,"http://automationpractice.com/img/p/1/2/12-large_default.jpg");
-    }
+    }*/
 }

@@ -7,11 +7,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static pages.MainPage.driver;
+//import static pages.MainPage.driver;
 
-public class CasualDressPage {
+public class CasualDressPage extends BasePage {
     public CasualDressPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
+        //PageFactory.initElements(driver, this);
     }
 
     @FindBy(css = ".product-container")
@@ -22,20 +23,20 @@ public class CasualDressPage {
     static WebElement popupBtn;
 
 
-    public static void hoverOverDress() {
+    public void hoverOverDress() {
         Actions action = new Actions(driver);
         action.moveToElement(hoverdress).build().perform();
     }
 
-    public static void pressAddBtn() {
+    public void pressAddBtn() {
         addbtn.click();
     }
 
-    public static void switchToActivate() {
+    public void switchToActivate() {
         driver.switchTo().activeElement();
     }
 
-    public static ShoppingCartSummary clickPopupBtn() {
+    public ShoppingCartSummary clickPopupBtn() {
         popupBtn.click();
         return new ShoppingCartSummary(driver);
     }
