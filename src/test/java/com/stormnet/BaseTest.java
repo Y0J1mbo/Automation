@@ -4,25 +4,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.time.Duration;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-//import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class BaseTest {
     private static WebDriver driver;
-    //protected static RemoteWebDriver driver;
 
     @BeforeAll
     public static void driverSetUp() throws MalformedURLException {
-       if (driver == null) {
+        if (driver == null) {
             //WebDriverManager.chromedriver().setup();
             // driver = new FirefoxDriver();
             System.setProperty("webdriver.chrome.driver", "/Users/mikalaiilyin/IdeaProjects/chromedriver");
@@ -46,10 +37,12 @@ public class BaseTest {
     }
 
 
-
     @AfterAll
     public static void driverTearDown() {
         driver.quit();
     }
-    public WebDriver getDriver(){return driver;}
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
