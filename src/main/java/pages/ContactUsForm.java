@@ -19,12 +19,16 @@ public class ContactUsForm extends BasePage {
     @FindBy(css = "#submitMessage")
     static WebElement submitMesssage;
     @FindBy(css = "#center_column > p")
-    WebElement message;
+    static WebElement message;
 
     public ContactUsForm(WebDriver driver) {
         super(driver);
     }
 
+    public static void checkAnswer() {
+        message.getText()
+                .contains("Your comment has been added and will be available once approved by a moderator ");
+    }
     public static void subjectHeadingChoose() {
         Select subject = new Select(subHeading);
         subject.selectByValue("2");
@@ -35,7 +39,6 @@ public class ContactUsForm extends BasePage {
         for (WebElement option : refNumber) {
             if (option.getText().contains(referenceNumber)) {
                 option.click();
-                break;
             }
         }
     }

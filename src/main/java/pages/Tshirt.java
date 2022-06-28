@@ -27,11 +27,15 @@ public class Tshirt extends BasePage {
     static WebElement sendbtn;
     @FindBy(css = ".fancybox-opened > div > div > div > p.submit > button")
     static WebElement okbtn;
-
+    @FindBy(css = ".fancybox-opened > div > div > div")
+    static WebElement resultCheck;
 
     public void setHoverOver() {
         Actions action = new Actions(driver);
         action.moveToElement(hovertshirt).build().perform();
+    }
+    public void setResultCheck(){
+        resultCheck.getText().contains("Your comment has been added and will be available once approved by a moderator");
     }
 
     public void clickMorebtn() {

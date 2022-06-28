@@ -84,6 +84,8 @@ public class GoogleTest extends BaseTest {
         // Step 8 choose product
         ContactUsForm.textInput();
         ContactUsForm.submitForm();
+        // Test Check
+        ContactUsForm.checkAnswer();
     }
 
     @Test
@@ -114,6 +116,8 @@ public class GoogleTest extends BaseTest {
         shoppingCartSummary.setBankwire();
         // step 11 confirm
         shoppingCartSummary.setConfirmorder();
+        // Test Check
+        shoppingCartSummary.checkResult();
     }
 
     @Test
@@ -141,7 +145,11 @@ public class GoogleTest extends BaseTest {
         tshirt.clickSendBtn();
         // step 6
         tshirt.switchToActivate();
+        //Test Check
+        tshirt.setResultCheck();
         tshirt.clickOkBtn();
+
+
     }
 
     @Test

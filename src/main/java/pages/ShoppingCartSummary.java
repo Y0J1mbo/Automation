@@ -21,7 +21,12 @@ public class ShoppingCartSummary extends BasePage {
     static WebElement confirmorder;
     @FindBy(css = ".box")
     WebElement refNumber;
+    @FindBy(css = "#center_column > div > p")
+    WebElement result;
 
+    public void checkResult() {
+        result.getText().contains("Your order on My Store is complete. ");
+    }
     public void setProccAdrs() {
         proccAdrs.click();
     }
